@@ -1,0 +1,19 @@
+rethinkdb:
+  image: rethinkdb
+  ports:
+    - "28015:28015"
+    - "8080:8080"
+  env_file: .env
+  command: "rethinkdb --bind all --initial-password $INITIAL_PASSWORD"
+app:
+  build: .
+  dockerfile: "./Dockerfile-dev"
+  volumes:
+    - ./:/app
+  links:
+    - rethinkdb
+  ports:
+    - "3000:3000"
+    - "4000:4000"
+  command: "npm run watch"
+

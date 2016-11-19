@@ -1,0 +1,5 @@
+const json = require('toml')
+  .parse(require('fs')
+    .readFileSync(require('path')
+      .join(__dirname, '.hz', 'schema.toml')))
+console.log(json)
